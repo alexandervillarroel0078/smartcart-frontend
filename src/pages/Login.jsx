@@ -13,10 +13,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post(import.meta.env.VITE_API_URL + '/login', {
         correo,
-        password,
+        contrasena: password, // ✅ CAMBIAMOS 'password' → 'contrasena'
       });
+      
 
       localStorage.setItem('token', response.data.token);
       navigate('/'); // Redirige al home o a /usuarios
