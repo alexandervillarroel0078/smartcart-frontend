@@ -13,9 +13,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      console.log("🌐 URL del backend:", import.meta.env.VITE_API_URL); // ⬅️ ESTA LÍNEA AGREGA
+
       const response = await axios.post(import.meta.env.VITE_API_URL + '/login', {
         correo,
-        contrasena: password, // ✅ CAMBIAMOS 'password' → 'contrasena'
+        password,
+        //contrasena: password, // ✅ CAMBIAMOS 'password' → 'contrasena'
       });
       
       console.log("✅ Login response:", response.data); // <-- aquí se imprime la respuesta del backend
