@@ -18,11 +18,13 @@ const Login = () => {
         contrasena: password, // ✅ CAMBIAMOS 'password' → 'contrasena'
       });
       
+      console.log("✅ Login response:", response.data); // <-- aquí se imprime la respuesta del backend
 
       localStorage.setItem('token', response.data.token);
       navigate('/'); // Redirige al home o a /usuarios
     } catch (error) {
       alert('❌ Credenciales incorrectas');
+      console.error("🔴 Error en login:", error.response); // <-- esto también ayuda
     }
   };
 
