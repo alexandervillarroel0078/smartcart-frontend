@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
+
 import { useNavigate } from 'react-router-dom';
 import { obtenerTokenVisitante } from "../services/auth";
 
@@ -13,10 +14,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await api.post('/login', {
         correo,
         password,
       });
+      
 
       localStorage.setItem('token', response.data.token);
       navigate('/'); // Redirige al home o a /usuarios
