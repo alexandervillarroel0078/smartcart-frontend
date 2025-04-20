@@ -34,8 +34,9 @@ const Notificaciones = () => {
             <ul className="space-y-1 text-sm">
               {productos.map((p) => (
                 <li key={p.id} className="text-red-600">
-                  ⚠️ <strong>{p.nombre}</strong>: {p.stock} en stock
-                </li>
+                ⚠️ <strong>{p.nombre}</strong>: {p.stock} en stock (mín. {p.umbral_minimo})
+              </li>
+              
               ))}
             </ul>
           )}

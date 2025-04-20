@@ -16,3 +16,18 @@ export const crearCarrito = async () => {
   });
   return res.data.id_carrito;
 };
+const pagarAhora = async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.post(
+      `http://localhost:5000/ventas/pagar/${idCarrito}`,
+      { metodo_pago: "Simulado" },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    alert("✅ Pago exitoso\n" + JSON.stringify(res.data, null, 2));
+  } catch (err) {
+    console.error("❌ Error al simular pago:", err);
+    alert("❌ Hubo un error al procesar el pago.");
+  }
+};

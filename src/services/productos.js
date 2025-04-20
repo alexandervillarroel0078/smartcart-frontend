@@ -77,13 +77,11 @@ export const actualizarProducto = async (id, datos) => {
 
 export const obtenerAlertas = async () => {
   const token = localStorage.getItem("token");
-  const res = await api.get("/productos/alertas", {
+  const res = await api.get("/inventario/alertas", {
     headers: { Authorization: `Bearer ${token}` }
   });
-  return res.data.alertas; // ✅ aquí devolvemos directamente el array
+  return res.data.alertas;
 };
-
-
 
 // src/services/productos.js
 export const actualizarStock = async ({ id, cantidad }) => {
@@ -104,14 +102,33 @@ export const actualizarStock = async ({ id, cantidad }) => {
 
 export const actualizarVisibilidad = async (id, visible) => {
   const token = localStorage.getItem("token");
-  return api.put(
-    `/productos/${id}/visibilidad`,
-    { visible },
-    {
+  try {
+    const res = await api.put(`/productos/${id}/visibilidad`, { visible }, {
       headers: {
-        Authorization: `Bearer ${token}` // ✅ MUY IMPORTANTE
+        Authorization: `Bearer ${token}`
       }
-    }
-  );
+    });
+    return res.data.success;
+  } catch (error) {
+    console.error("❌ Error al actualizar visibilidad:", error);
+    return false;
+  }
 };
- 
+// ✅ Obtener todos los productos sin paginación
+export const obtenerTodosLosProductos = async () => {
+  const token = localStorage.getItem("token");
+  const res = await api.get("/productos/todos", {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data.productos;
+};
+
+// ✅ Obtener productos con stock bajo (sin paginación)
+export const obtenerProductosCriticos = async () => {
+  const token = localStorage.getItem("token");
+  const res = await api.get("/productos/criticos", {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.data; // devuelve array directo
+};
+

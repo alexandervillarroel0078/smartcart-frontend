@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // ✅ USA la variable de entorno
+  baseURL: 'http://localhost:5000', // ← cambia si usas otro puerto
 });
-
 
 export default api;

@@ -21,6 +21,14 @@ import ActualizarStock from "./pages/ActualizarStock";
 import Catalogo from "./pages/Catalogo";
 import Carrito from "./pages/Carrito";
 import { obtenerRol } from "./utils/auth";
+import Roles from "./pages/Roles";
+import Bitacora from "./pages/Bitacora";
+import ReporteInventario from "./pages/ReporteInventario";
+import ReporteCompras from './pages/ReporteCompras';
+import ReportesGraficos from './pages/ReportesGraficos';
+import Recibo from "./pages/Recibo";
+import Calificar from "./pages/Calificar";
+
 
 const AppLayout = () => {
   const token = localStorage.getItem("token");
@@ -67,7 +75,20 @@ const AppLayout = () => {
           <Route path="/catalogo" element={<Catalogo />} />
 
 
+          <Route path="/roles" element={token && rol === "admin" ? <Roles /> : <Navigate to="/" />} />
+          <Route path="/bitacora" element={token && rol === "admin" ? <Bitacora /> : <Navigate to="/" />} />
+
+
           <Route path="/carrito" element={<Carrito />} />
+
+          <Route path="/reporte-compras" element={token && rol === "admin" ? <ReporteCompras /> : <Navigate to="/" />} />
+          <Route path="/inventario/reporte" element={token && ["admin", "almacenero"].includes(rol) ? <ReporteInventario /> : <Navigate to="/" />} />
+          <Route path="/reportes-graficos" element={<ReportesGraficos />} />
+        
+        <Route path="/recibo/:id" element={<Recibo />} />
+<Route path="/calificar/:id" element={<Calificar />} />
+        
+        
         </Routes>
       </div>
     </div>

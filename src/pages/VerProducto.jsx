@@ -26,7 +26,8 @@ const VerProducto = () => {
       <p><strong>Descripción:</strong> {producto.descripcion}</p>
       <p><strong>Precio:</strong> Bs {producto.precio}</p>
       <p><strong>Stock:</strong> {producto.stock}</p>
-      <p><strong>Umbral mínimo:</strong> {producto.umbral_stock}</p>
+      <p><strong>Umbral mínimo:</strong> {producto.umbral_minimo}</p>
+
       <p><strong>Categoría ID:</strong> {producto.id_categoria}</p>
     </div>
   );

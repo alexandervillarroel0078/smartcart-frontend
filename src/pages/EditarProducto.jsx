@@ -18,18 +18,24 @@ const EditarProducto = () => {
 
   useEffect(() => {
     obtenerCategorias().then(setCategorias);
-
-    obtenerProductoPorId(id).then(producto => {
-      setFormulario({
-        nombre: producto.nombre,
-        descripcion: producto.descripcion,
-        precio: producto.precio,
-        stock: producto.stock,
-        umbral_stock: producto.umbral_stock,
-        id_categoria: producto.id_categoria,
+  
+    obtenerProductoPorId(id)
+      .then(producto => {
+        setFormulario({
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          precio: producto.precio,
+          stock: producto.stock,
+          umbral_stock: producto.umbral_stock,
+          id_categoria: producto.id_categoria,
+        });
+      })
+      .catch((error) => {
+        console.error("❌ Error al cargar el producto:", error);
+        alert("❌ Error al cargar el producto");
       });
-    }).catch(() => alert("❌ Error al cargar el producto"));
   }, [id]);
+  
 
   const handleChange = (e) => {
     setFormulario({ ...formulario, [e.target.name]: e.target.value });
@@ -37,6 +43,24 @@ const EditarProducto = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Verificar que el precio y el stock sean válidos
+    if (isNaN(formulario.precio) || formulario.precio <= 0) {
+      alert("❌ El precio debe ser un número mayor a 0.");
+      return;
+    }
+  
+    if (isNaN(formulario.stock) || formulario.stock < 0) {
+      alert("❌ El stock debe ser un número positivo.");
+      return;
+    }
+  
+    if (isNaN(formulario.umbral_stock) || formulario.umbral_stock <= 0) {
+      alert("❌ El umbral de stock debe ser un número mayor a 0.");
+      return;
+    }
+  
+    // Enviar el formulario
     const exito = await actualizarProducto(id, formulario);
     if (exito) {
       alert("✅ Producto actualizado");
@@ -45,6 +69,7 @@ const EditarProducto = () => {
       alert("❌ Error al actualizar");
     }
   };
+  
 
   return (
     <div className="p-6 max-w-xl mx-auto">

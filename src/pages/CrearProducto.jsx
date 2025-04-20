@@ -1,4 +1,4 @@
-// src/pages/CrearProducto.jsx
+// 📁 src/pages/CrearProducto.jsx
 import React, { useEffect, useState } from 'react';
 import { obtenerCategorias } from '../services/categorias';
 import { registrarProducto } from '../services/productos';
@@ -11,9 +11,12 @@ const CrearProducto = () => {
     descripcion: '',
     precio: '',
     stock: '',
-    umbral_stock: '',
+    modelo: '',
+    umbral_minimo: '',
+    umbral_maximo: '',
     id_categoria: '',
   });
+  
 
   const navigate = useNavigate();
 
@@ -42,94 +45,130 @@ const CrearProducto = () => {
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Registrar Producto</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <label className="block font-semibold">
-          Nombre del producto
-          <input
-            type="text"
-            name="nombre"
-            value={formulario.nombre}
-            onChange={handleChange}
-            required
-            className="w-full border px-4 py-2 rounded mt-1"
-          />
-        </label>
+    <div className="min-h-screen bg-gray-900 text-white p-6 flex items-center justify-center">
+      <div className="w-full max-w-xl bg-gray-800 border border-gray-700 rounded-lg shadow-xl p-6">
+        <h2 className="text-3xl font-bold text-cyan-300 mb-6 text-center">📝 Registrar Producto</h2>
 
-        <label className="block font-semibold">
-          Descripción
-          <textarea
-            name="descripcion"
-            value={formulario.descripcion}
-            onChange={handleChange}
-            required
-            className="w-full border px-4 py-2 rounded mt-1"
-          />
-        </label>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Nombre */}
+          <div>
+            <label className="block text-cyan-200 font-medium mb-1">Nombre del producto</label>
+            <input
+              type="text"
+              name="nombre"
+              value={formulario.nombre}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
+          </div>
 
-        <label className="block font-semibold">
-          Precio
-          <input
-            type="number"
-            name="precio"
-            value={formulario.precio}
-            onChange={handleChange}
-            required
-            className="w-full border px-4 py-2 rounded mt-1"
-          />
-        </label>
+          {/* Descripción */}
+          <div>
+            <label className="block text-cyan-200 font-medium mb-1">Descripción</label>
+            <textarea
+              name="descripcion"
+              value={formulario.descripcion}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded resize-none focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
+          </div>
 
-        <label className="block font-semibold">
-          Stock
-          <input
-            type="number"
-            name="stock"
-            value={formulario.stock}
-            onChange={handleChange}
-            required
-            className="w-full border px-4 py-2 rounded mt-1"
-          />
-        </label>
+          {/* Precio */}
+          <div>
+            <label className="block text-cyan-200 font-medium mb-1">Precio</label>
+            <input
+              type="number"
+              name="precio"
+              value={formulario.precio}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
+          </div>
 
-        <label className="block font-semibold">
-          Umbral mínimo
-          <input
-            type="number"
-            name="umbral_stock"
-            value={formulario.umbral_stock}
-            onChange={handleChange}
-            required
-            className="w-full border px-4 py-2 rounded mt-1"
-          />
-        </label>
+          {/* Stock */}
+          <div>
+            <label className="block text-cyan-200 font-medium mb-1">Stock</label>
+            <input
+              type="number"
+              name="stock"
+              value={formulario.stock}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
+          </div>
 
-        <label className="block font-semibold">
-          Categoría
-          <select
-            name="id_categoria"
-            value={formulario.id_categoria}
-            onChange={handleChange}
-            required
-            className="w-full border px-4 py-2 rounded mt-1"
-          >
-            <option value="">-- Selecciona una categoría --</option>
-            {categorias.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.nombre}
-              </option>
-            ))}
-          </select>
-        </label>
+          {/* Modelo */}
+<div>
+  <label className="block text-cyan-200 font-medium mb-1">Modelo</label>
+  <input
+    type="text"
+    name="modelo"
+    value={formulario.modelo}
+    onChange={handleChange}
+    required
+    className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+  />
+</div>
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Guardar producto
-        </button>
-      </form>
+{/* Umbral mínimo */}
+<div>
+  <label className="block text-cyan-200 font-medium mb-1">Umbral mínimo</label>
+  <input
+    type="number"
+    name="umbral_minimo"
+    value={formulario.umbral_minimo}
+    onChange={handleChange}
+    required
+    className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+  />
+</div>
 
+{/* Umbral máximo */}
+<div>
+  <label className="block text-cyan-200 font-medium mb-1">Umbral máximo</label>
+  <input
+    type="number"
+    name="umbral_maximo"
+    value={formulario.umbral_maximo}
+    onChange={handleChange}
+    required
+    className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+  />
+</div>
+
+
+          {/* Categoría */}
+          <div>
+            <label className="block text-cyan-200 font-medium mb-1">Categoría</label>
+            <select
+              name="id_categoria"
+              value={formulario.id_categoria}
+              onChange={handleChange}
+              required
+              className="w-full bg-gray-900 border border-gray-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            >
+              <option value="">-- Selecciona una categoría --</option>
+              {categorias.map((c) => (
+                <option key={c.id} value={c.id}>{c.nombre}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Botón */}
+          <div className="text-center">
+            <button
+              type="submit"
+              className="bg-cyan-600 hover:bg-cyan-500 px-6 py-2 text-white font-semibold rounded shadow-md transition"
+            >
+              Guardar producto
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
