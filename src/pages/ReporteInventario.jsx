@@ -8,7 +8,7 @@ const ReporteInventario = () => {
   const [categoriaFiltro, setCategoriaFiltro] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/inventario/reporte", {
+    fetch("https://smartcart-backend-klyi.onrender.com/inventario/reporte", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +49,7 @@ const ReporteInventario = () => {
     if (estadoFiltro) query.append("estado", estadoFiltro);
     if (categoriaFiltro) query.append("categoria", categoriaFiltro);
   
-    fetch(`http://localhost:5000/inventario/reporte/pdf?${query.toString()}`, {
+    fetch(`https://smartcart-backend-klyi.onrender.com/inventario/reporte/pdf?${query.toString()}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
